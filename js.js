@@ -1,46 +1,50 @@
 ﻿$(document).ready(function() {
-  let j = false;
-  let y = false;
-  let a = false;
-  let g = false;
-  let t;
-  let k;
-  let w;
-  let q;
+  let j = false, y = false, a = false;
+  let t, k, w, q;
   document.getElementById("reset").hidden=true;
+  document.getElementById("line").hidden=true;
   function forAppellation() {
     let appellation = responseObject.name;
-    document.getElementById('appellation').innerHTML = '<h1>' + appellation + '</h1>';
+    let h1 = document.createElement('h1');
+    h1.append(appellation);
+    document.getElementById('appellation').append(h1);
   };
   function forFields() {
-    let fields = '';
       for (let i = 0; i < responseObject.fields.length; i++) {
         let b = i + 1;
+        let div = document.createElement('div');
+        let Fields1 = document.createElement('label');
         if (responseObject.fields[i].label) {
-          fields += '<label for="' + b + '">' + responseObject.fields[i].label + '</label><br>'
+          Fields1.setAttribute('for', b);
+          Fields1.innerHTML = responseObject.fields[i].label;
+          div.append(Fields1);
+          // document.getElementById('fields').append(Fields1);
         }
+        let Fields2 = document.createElement('input');
         if ((responseObject.fields[i].input.type == "number") && (responseObject.fields[i].input.mask)) {
           t = "tel"
         } else t = responseObject.fields[i].input.type
-        fields += '<input id="' + b + '" ' + 'type="' + t + '" '
+        Fields2.setAttribute('id', b);
+        Fields2.setAttribute('type', t);
         if (responseObject.fields[i].input.required == true) { 
-          fields += 'required '
+          Fields2.setAttribute('required', '');
         }
         if (responseObject.fields[i].input.placeholder) {
-          fields += 'placeholder="' + responseObject.fields[i].input.placeholder + '" '
+          Fields2.setAttribute('placeholder', responseObject.fields[i].input.placeholder);
         }
         if (responseObject.fields[i].input.checked == "true") { 
-          fields += 'checked'
+          Fields2.setAttribute('checked', '');
         }
         if (responseObject.fields[i].input.technologies) {
           k = i;
           j = true;
         } 
         if (responseObject.fields[i].input.mask)  {
-          fields += 'class="' + i  + '"'
+          Fields2.setAttribute('class', i);
         }
         if (responseObject.fields[i].input.filetype) {
-          fields += 'class="filetype" accept=""'
+          Fields2.setAttribute('class', 'filetype');
+          Fields2.setAttribute('accept', '');
           w = i;
           a = true;
         }
@@ -48,15 +52,16 @@
           q = i;
           y = true;
         }
-        fields += '><br>'
+        div.append(Fields2);
+        document.getElementById('fields').append(div);
+        // document.getElementById('fields').append(Fields2);
       }
-      document.getElementById('fields').innerHTML = fields;
       if (j) {
         let options = '';
         for (let i = 0; i < responseObject.fields[k].input.technologies.length; i++) { 
           options += '<option>' + responseObject.fields[k].input.technologies[i] + '</option>'
         }
-        $('input[type="technology"]').replaceWith('<select multiple size="3">' + options + '</select>')
+        $('input[type="technology"]').replaceWith('<select multiple size="5">' + options + '</select>')
       }
       for (let l = 0; l < responseObject.fields.length; l++) {
           if (responseObject.fields[l].input.mask) {
@@ -75,7 +80,7 @@
               character += ','
             }
           } 
-          $(".filetype").attr('accept', character);
+          $(".filetype").attr('accept', character); 
       }
       if (y) {
         let colors = ''; 
@@ -87,49 +92,46 @@
   };
   function forReferences() {
     if (responseObject.references) { 
-      let references = ''
       for (let i = 0; i < responseObject.references.length; i++) {
         if (responseObject.references[i].input) {
-          g = true;
-          references += '<input type="' + responseObject.references[i].input.type +'" '
-        } else g = false;
-        if (g) { 
+          let References1 = document.createElement('input')
+          References1.setAttribute('type', responseObject.references[i].input.type)
           if (responseObject.references[i].input.required) {
-            references += 'required '
+            References1.setAttribute('required', '')
           }
           if (responseObject.references[i].input.checked == 'true') {
-            references += 'checked '
+            References1.setAttribute('checked', '')
           }
-        }
-        if (responseObject.references[i].input) {
-          references += ' >'
-        }
+          document.getElementById('references').append(References1);
+        } 
         if (responseObject.references[i]['text without ref']) {
-          references += '<p>' + responseObject.references[i]['text without ref'] + '</p><br>'
+          let References2 = document.createElement('p');
+          References2.innerHTML = responseObject.references[i]['text without ref']; 
+          document.getElementById('references').append(References2);
         }
         if (responseObject.references[i].ref) {
-          references += '<a href="' + responseObject.references[i].ref + '" >'
-        }
-        if (responseObject.references[i].text) {
-          references += responseObject.references[i].text + '</a><br>'
+          let References3 = document.createElement('a');
+          References3.setAttribute('href', responseObject.references[i].ref);
+          References3.innerHTML = responseObject.references[i].text
+          document.getElementById('references').append(References3);
         }
       }
-      document.getElementById('references').innerHTML = references;
     }
   }
   function forButtons() {
     if (responseObject.buttons) {
-      let buttons = ''
       for (let i = 0; i < responseObject.buttons.length; i++) {
-        buttons += '<button>' + responseObject.buttons[i].text + '</button>'
+        let Buttons1 = document.createElement('button');
+        Buttons1.innerHTML = responseObject.buttons[i].text;
+        document.getElementById('buttons').append(Buttons1);
       }
-      document.getElementById('buttons').innerHTML = buttons;
     }
   }
   parse.onclick = function() {  
     document.getElementById("parse").hidden=true;
     document.getElementById("parsefile").hidden=true;   
     document.getElementById("reset").hidden=false;
+    document.getElementById("line").hidden=false;
     const addedFiles = document.getElementById("parsefile");
     let file = addedFiles.files[0]
     let reader = new FileReader()
@@ -144,19 +146,14 @@
   };
   reset.onclick = function () {
     document.getElementById("reset").hidden=true;
+    document.getElementById("line").hidden=true;
     document.getElementById("parse").hidden=false;
     document.getElementById("parsefile").hidden=false;   
     document.getElementById('appellation').innerHTML = '';
     document.getElementById('fields').innerHTML = '';
     document.getElementById('references').innerHTML = '';
     document.getElementById('buttons').innerHTML = '';
-    j = false;
-    y = false;
-    a = false;
-    g = false;
-    t = undefined;
-    k = undefined;
-    w = undefined;
-    q = undefined;
+    j = false; y = false; a = false;
+    t = undefined; k = undefined; w = undefined; q = undefined;
   }
 });
