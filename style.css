@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  font-family: "Roboto", sans-serif;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background-image: url(background.webp);
+}
+input[type="file"] {
+  margin-top: 5px;
+  margin-bottom: 15px;
+}
+input[type="textarea"],
+input[type="number"],
+input[type="email"],
+input[type="tel"],
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="color"] {
+  background-color: aqua;
+  color: indigo;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 3px inset blue;
+  width: 200px;
+  height: 25px;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+h1 {
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-bottom: 15px;
+}
+label {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+select {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+#references {
+  display: flex;
+}
+a {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+input[type="button"],
+button {
+  width: 75px;
+  height: 35px;
+  color: white;
+  background-color: blue;
+  border-radius: 13px;
+  margin: 5px;
+}
+#buttons {
+  margin: 8px;
+}
+.body {
+  margin: 0 auto;
+  width: 320px;
+  border: 6px solid darkblue;
+  border-radius: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  background-color: darkturquoise;
+}
+#parsefile,
+#fields,
+#references,
+#buttons {
+  margin-left: 10px;
+}
+@media (max-width: 480px) {
+  .body {
+    width: 280px;
+  }
+}
