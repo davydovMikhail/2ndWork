@@ -44,7 +44,6 @@ input[type="date"],
 input[type="color"] {
   background-color: aqua;
   color: indigo;
-  /* margin-top: px; */
   margin-bottom: 10px;
   margin-top: 5px;
   border: 3px inset blue;
@@ -65,14 +64,16 @@ p {
   margin-left: 5px;
 }
 label {
-  /* padding-top: 5px;
-  padding-bottom: 5px; */
   padding: 5px 5px 5px 0px;
   margin-bottom: 5px;
 }
 select {
   margin-top: 15px;
   margin-bottom: 15px;
+  width: 100%;
+}
+option {
+  padding: 4px;
 }
 #references {
   display: flex;
@@ -93,7 +94,6 @@ button {
   margin: 0 auto 10px;
 }
 #buttons {
-  /* margin: 8px; */
   margin-top: 10px;
   display: flex;
   justify-content: center;
@@ -114,9 +114,6 @@ button {
   display: flex;
   flex-direction: column;
 }
-/* #parse {
-  margin-right: 100px;
-} */
 #parsefile,
 #fields,
 #references {

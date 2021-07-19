@@ -18,7 +18,6 @@
           Fields1.setAttribute('for', b);
           Fields1.innerHTML = responseObject.fields[i].label;
           div.append(Fields1);
-          // document.getElementById('fields').append(Fields1);
         }
         let Fields2 = document.createElement('input');
         if ((responseObject.fields[i].input.type == "number") && (responseObject.fields[i].input.mask)) {
@@ -54,14 +53,13 @@
         }
         div.append(Fields2);
         document.getElementById('fields').append(div);
-        // document.getElementById('fields').append(Fields2);
       }
       if (j) {
         let options = '';
         for (let i = 0; i < responseObject.fields[k].input.technologies.length; i++) { 
           options += '<option>' + responseObject.fields[k].input.technologies[i] + '</option>'
         }
-        $('input[type="technology"]').replaceWith('<select multiple size="5">' + options + '</select>')
+        $('input[type="technology"]').replaceWith('<select multiple size="6">' + options + '</select>')
       }
       for (let l = 0; l < responseObject.fields.length; l++) {
           if (responseObject.fields[l].input.mask) {
